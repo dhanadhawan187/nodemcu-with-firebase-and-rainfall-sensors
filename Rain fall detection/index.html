@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Smart Agri</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="images/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js"></script>
+    <script>
+        var id = 0;
+
+        var config = {
+            apiKey: "AIzaSyCVXQssZXd9QB41t0OksN1Oiie5H6iQE3U",
+   authDomain: "fir-bba82.firebaseapp.com",
+   databaseURL: "https://fir-bba82.firebaseio.com",
+   projectId: "fir-bba82",
+   storageBucket: "fir-bba82.appspot.com",
+   messagingSenderId: "161148023411"
+        };
+        firebase.initializeApp(config);
+        function fun() { //write
+            var un = $("#u").val();
+            var pw = $("#p").val();
+            firebase.database().ref('users/' + id).set({
+                username: un,
+                password: pw
+            }, function (error) {
+                if (error) {
+                    alert("failed");
+                } else {
+                    alert("added");
+                    id = id + 1;
+                }
+            });
+        }
+        function funn() { //read
+			//$("#z").val("Test");
+            var un = $("#user").val();
+            var pw = $("#pass").val();
+            var i, id = 0;
+            var u,p;
+            //var userId = firebase.auth().currentUser.uid;
+            for (i = 0; i < 1; i++) {
+                firebase.database().ref('/users/' + i).once('value').then(function (snapshot) {
+                    u = snapshot.val().RAIN_STATUS;
+                    p = snapshot.val().MOTOR_STATUS;
+                    $("#z").val(u);
+                    if(p=="0")
+                    $("#x").val("Motor Off");
+                    if(p=="1")
+                    $("#x").val("Motor ON");
+                    if(snapshot.exists())
+                    {
+                        if(u==un)
+                        {
+                            alert(u+" logged in");
+                        }
+                    }
+                    
+                });
+                }
+                
+            }
+    </script>
+<body>
+
+	
+	<div class="container-contact100" style="background-image: url('images/bg-01.jpg');">
+		<div class="wrap-contact100">
+			
+				<span class="contact100-form-title">
+					Smart Agri
+				</span>
+				<div class="wrap-input100" >
+					<span class="label-input100">Rainfall Status</span>
+					<input class="input100" id="z" type="text" name="email" >
+				</div>
+				<div class="wrap-input100">
+					<span class="label-input100">Motor Status</span>
+					<input class="input100" id="x" type="text" name="web">
+				</div>
+				<div class="wrap-input100" >
+					<span class="label-input100">Soil Moisture Level</span>
+					<input class="input100"  type="text" name="name">
+				</div>
+
+				
+
+				<div class="wrap-input100">
+					<span class="label-input100">Soil Ph level</span>
+					<input class="input100" type="text" name="web" >
+				</div>
+
+				
+				<center><button onclick="funn()"> REFRESH </button></center>
+				
+				
+			
+		</div>
+
+		<!--<span class="contact100-more">
+				Call us on +001 345 6178
+		</span>-->
+	</div>
+
+
+
+	<div id="dropDownSelect1"></div>
+
+<!--===============================================================================================-->
+	<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/bootstrap/js/popper.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="js/main.js"></script>
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-23581568-13"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-23581568-13');
+</script>
+
+</body>
+</html>
